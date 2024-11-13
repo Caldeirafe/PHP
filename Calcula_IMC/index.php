@@ -35,7 +35,7 @@ echo "Seu IMC é: " . round($imc, 2) . "<br>";
 if ($altura <= 0 || $peso <= 0) {
     echo "Digite um número maior que ZERO!";
 } else {
-    // Avalia as faixas do IMC
+
     if ($imc < 18.5) {
         echo "TA SÓ O ARAME";
     } elseif ($imc >= 18.5 && $imc <= 24.9) {
