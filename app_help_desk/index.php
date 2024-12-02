@@ -52,7 +52,7 @@
                   <div class="text-danger"> Login obrigatório!</div>
               <?php } ?>
 
-              
+                  <a href="cadastro.php">Novo? Cadastre-se </a>
                 <button class="btn btn-lg btn-info btn-block" type="submit">Entrar</button>
               </form>
             </div>
