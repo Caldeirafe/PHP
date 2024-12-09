@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $senha = $_POST['senha'];
     $perfil = $_POST['perfil'];
 
+    // Verificar se email já existe
     $stmt = $link->prepare("SELECT email FROM tb_user WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -18,8 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
+    // Verificar se perfil foi selecionado
+    if ($perfil == 'Selecione') {
+        header('Location: cadastro.php?cadastro=erro&motivo=perfil');
+        exit();
+    }
+
+    // Hash seguro da senha
     $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
+    // Inserir novo usuário
     $stmt = $link->prepare("INSERT INTO tb_user (nome, email, senha, perfil) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $nome, $email, $senhaHash, $perfil);
     
