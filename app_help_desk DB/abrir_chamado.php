@@ -55,11 +55,16 @@ require_once "validar_login.php"
                     <div class="form-group">
                       <label>Categoria</label>
                       <select name="categoria" class="form-control">
-                        <option>Criação Usuário</option>
-                        <option>Impressora</option>
-                        <option>Hardware</option>
-                        <option>Software</option>
-                        <option>Rede</option>
+                      <option value="" disabled selected>Selecione uma opção!</option>
+                      <option value="Criação Usuário">Criação Usuário</option>
+                      <option value="Impressora">Impressora</option>
+                      <option value="Hardware">Hardware</option>
+                      <option value="Software">Software</option>
+                      <option value="Rede">Rede</option>
+                      <option value="Formatação">Formatação</option>
+                      <option value="Orçamento">Orçamento</option>
+                      <option value="Desenvolvimento">Desenvolvimento</option>
+                      <option value="Outros">Outros</option>
                       </select>
                     </div>
                     

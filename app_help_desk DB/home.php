@@ -158,10 +158,22 @@ require_once "validar_login.php";
                                     <p>Autorização</p>
                                 </div>
                             </a>
-                            <a href="consultar_chamado.php" class="col-6">
+                            <a href="editar_chamado.php" class="col-6">
                                 <div class="card p-3 text-center">
                                     <img src="editar-arquivo.png" width="70" height="70" alt="Editar Arquivo">
                                     <p>Editar Arquivo</p>
+                                </div>
+                            </a>
+                            <a href="consultar_chamado.php" class="col-6">
+                                <div class="card p-3 text-center">
+                                    <img src="relatorio.png" width="70" height="70" alt="relatorio">
+                                    <p>Relatorio</p>
+                                </div>
+                            </a>
+                            <a href="consultar_chamado.php" class="col-6">
+                                <div class="card p-3 text-center">
+                                    <img src="usuarios.png" width="70" height="70" alt="usuarios">
+                                    <p>Usuarios</p>
                                 </div>
                             </a>
                         </div>

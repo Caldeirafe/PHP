@@ -1,22 +1,29 @@
 <?php
-  require_once "validar_login.php";
+require_once "validar_login.php";
+require_once "conexao.php";  // Importante incluir o arquivo de conexão
 
-  //declarando variável
-  $chamados = [];
+$usuarioPerfil = $_SESSION['perfil'];
+$usuarioId = $_SESSION['id'];
 
-  //Abrindo o arquivo para consultar os dados
-  $arquivo = fopen('registros.txt', 'r'); 
+// Preparar a consulta SQL
+if ($usuarioPerfil == 'ADM') {
+    // Se for administrador, busca todos os chamados
+    $stmt = $link->prepare("SELECT * FROM chamados");
+} else {
+    // Se não for administrador, busca apenas os chamados do usuário logado
+    $stmt = $link->prepare("SELECT * FROM chamados WHERE usuario_id = ?");
+    $stmt->bind_param("i", $usuarioId);
+}
 
-  //Enquanto não for o final do arquivo ele entra;
-  while(!feof($arquivo)){
-    //Pega a linha e guarda no registro
-    $registro = fgets($arquivo);
-    //Pega o registro e guarda num array, onde conterá todos os chamados
-    $chamados[] = $registro;
-  }
+// Executar a consulta
+$stmt->execute();
+$resultado = $stmt->get_result();
 
-  //sem esquecer de fechar o arquivo
-  fclose($arquivo);
+// Recuperar os chamados
+$chamados = [];
+while ($chamado = $resultado->fetch_assoc()) {
+    $chamados[] = $chamado;
+}
 ?>
 
 <html lang="pt-BR">
@@ -56,38 +63,21 @@
             <div class="card-body">
               
             <!-- Rodamos um foreach passando por todos os chamados -->
-              <?php 
-                $usuarioPerfil = $_SESSION['perfil'];
-                $usuarioId = $_SESSION['id'];
-              
-              foreach($chamados as $chamado){ ?>
-
-                <!-- Usamos o explode para separar os valores de cada chamado em um novo array -->
-                <?php $chamado_dados = explode('|', $chamado); 
-                
-                //Para validar que só será exibido um novo card se possuir todos os valores preenchidos
-                  if(count($chamado_dados) < 5){
-                    continue; }
-
-                    if ($usuarioPerfil != 'administrador' && $chamado_dados[0] != $usuarioId) {
-                      continue;
-                      }
-              
-                ?>
               <div class="card mb-3 bg-light">
-                <div class="card-body">
-
-                  <!-- Nos 3 itens abaixo aplicamos os valores respectivos em cada um deles -->
-                  <h5 class="card-title"><?php echo $chamado_dados[2] ?></h5>
-                  <h6 class="card-subtitle mb-2 text-muted"><?php echo $chamado_dados[3] ?></h6>
-                  <p class="card-text"><?php echo $chamado_dados[4] ?></p>   
-                  <?php if ($usuarioPerfil == 'administrador') { ?>
-                    <p class="card-text"><strong>ID do usuário: </strong><?php echo $chamado_dados[0] ?></p>
+              <div class="card-body">
+    <?php foreach($chamados as $chamado){ ?>
+        <div class="card mb-3 bg-light">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo htmlspecialchars($chamado['titulo']) ?></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><?php echo htmlspecialchars($chamado['categoria']) ?></h6>
+                <p class="card-text"><?php echo htmlspecialchars($chamado['descricao']) ?></p>   
+                <?php if ($usuarioPerfil == 'administrador') { ?>
+                    <p class="card-text"><strong>ID do usuário: </strong><?php echo $chamado['usuario_id'] ?></p>
                   <?php } ?>            
                 </div>
               </div>
               <?php } ?>
-              
+
               <div class="row mt-5">
                 <div class="col-6">
                   <a class="btn btn-lg btn-warning btn-block" href="home.php">Voltar</a>

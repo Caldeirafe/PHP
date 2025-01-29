@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página 1</title>
+    <style>
+        * {
+            text-decoration: none;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            padding: 0;
+        }
+        main{
+            background-color: #FCFEFC;
+        }
+        body{
+            background-color: #FCFEFC;
+        }
+        a {
+            color: white;
+        }
+        h1 {
+            color: white;
+            padding: 20px;
+            background-color: rgb(0, 0, 0);
+        }
+        h2 {
+            padding: 1%;
+        }
+        section {
+            padding-top: 5%;
+            gap: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            padding-bottom: 4%;
+        }
+        button {
+            background-color: steelblue;
+            color: white;
+            width: 100px;
+            height: 40px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-items: center;
+            justify-self: center;
+            flex-direction: column;
+            color: rgb(0, 0, 0);
+            border-radius: 5%;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Requisições síncronas e assíncronas</h1>
+        <section>
+            <button type="button" onclick="requisicao('pag1_cont.php')">Página 1</button>
+            <button type="button" onclick="requisicao('pag2_cont.html')">Página 2</button>
+            <button type="button" onclick="requisicao('pag3_cont.html')">Página 3</button>
+        </section>
+            <div id="conteudo">
+            </div>
+        
+    </main>
+    <script>
+        function requisicao(url) {
+            document.getElementById('conteudo').innerHTML = ''
+            let imgloading = document.createElement('img')
+            imgloading.src = 'loading.gif'
+            imgloading.id = 'loading'
+            document.getElementById('conteudo').appendChild(imgloading)
+
+            let ajax = new XMLHttpRequest();
+
+            ajax.open('GET', url)
+
+            ajax.onreadystatechange = () =>{
+                if(ajax.readyState == 4){
+                    if(ajax.status == 200){
+                        console.log('requisição bem sucedida')
+                        document.getElementById('conteudo').innerHTML = ajax.responseText
+                    }
+                    if(ajax.status == 404){
+                        document.getElementById('conteudo').innerHTML = '<h2>Recurso não encontrado, codigo de erro 404</h2>'
+                    }
+                    //document.getElementById('loading').remove()
+                }
+            }
+            ajax.send()
+            console.log(ajax)
+        }
+        /*ajax.open('GET', url, true); // true indica que a requisição será assíncrona
+ajax.onload = function () {
+    if (ajax.status === 200) {
+        document.getElementById('conteudo').innerHTML = ajax.responseText;
+    } else {
+        document.getElementById('conteudo').innerHTML = 
+            `<p style="color: red;">Erro ao carregar a página: ${ajax.status}</p>`;
+    }
+};
+ajax.onerror = function () {
+    document.getElementById('conteudo').innerHTML = 
+        `<p style="color: red;">Erro de conexão. Verifique sua rede.</p>`;
+};
+;*/
+    </script>
+</body>
+</html>
