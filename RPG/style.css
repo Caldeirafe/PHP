@@ -1,0 +1,96 @@
+@font-face {
+    font-family: 'Rpg';
+    src: url('./src/BreatheFireIii-PKLOB.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Rpg2';
+    src: url('./src/TheWildBreathOfZelda-15Lv.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Rpg1';
+    src: url('./src/VecnaBold-4YY4.ttf') format('truetype');
+}
+ /* Estilos globais */
+body {
+    background-image: url(./img/doido2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+}
+main {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Cores personalizadas para cada elemento */
+h1 {
+    font-style: oblique;
+    font-family: 'Rpg';
+    font-size: 50px;
+    color: #ffffff; /* Vermelho para o título */
+}
+label {
+    font-family: 'Rpg1';
+    color: #ffffff; /* Verde para os labels */
+    font-weight: bold;
+}
+input, select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    color: #0000ff; /* Azul para o texto dos inputs e selects */
+}
+.classes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.classe-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.classe-container img {
+    background-color: rgb(218, 218, 218);
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.classe-container span {
+    font-size: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #00ff00; /* Amarelo para o nome das classes */
+}
+button[type="submit"] {
+    background-color: #800080; /* Roxo para o botão de enviar */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button[type="submit"]:hover {
+    background-color: #4b0082; /* Roxo mais escuro no hover */
+}
+.classe-container.selecionado {
+    padding: 2px;
+    transform: scale(1.2);
+}

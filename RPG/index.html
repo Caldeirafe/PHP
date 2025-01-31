@@ -3,56 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <style>
-        body{
-            background-image: url(./img/doido2.jpg);
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-    </style>
+    <title>Crie seu Personagem</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main>
-    <section>
-        <form action="" method="get">
-            <div>
-                <label for="">Nome:</label>
-                <input type="text">
-            </div>
-            <div>
-                <label for="">Raça:</label>
-                <select name="" id="">
-                    <option value="">Humano</option>
-                    <option value="">Elfo</option>
-                    <option value="">Anão</option>
-                    <option value="">Orcs</option>
-                </select>
-            </div>
+    <main>
+        <section>
+            <form action="personagem.php" method="get">
+                <h1>Personagem</h1>
                 <div>
-                    <label for="">Tipo:</label>
-                    <select name="" id="">
-                        <option value="">Heroi</option>
-                        <option value="">Anti-Heroi</option>
-                        <option value="">Vilão</option>
-                        <option value="">normal</option>
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                <div>
+                    <label for="raca">Raça:</label>
+                    <select id="raca" name="raca" required>
+                        <option value="Humano">Humano</option>
+                        <option value="Elfo">Elfo</option>
+                        <option value="Anao">Anão</option>
+                        <option value="Orc">Orc</option>
                     </select>
                 </div>
                 <div>
-                    <label for="">Classes</label>
+                    <label for="tipo">Tipo:</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="Heroi">Herói</option>
+                        <option value="AntiHeroi">Anti-Herói</option>
+                        <option value="Vilao">Vilão</option>
+                        <option value="Normal">Normal</option>
+                    </select>
                 </div>
                 <div>
-                    <button type="button"><img src="./img/Guerreiro.png" alt=""></button>
-                    <button type="button"><img src="./img/Mago.png" alt=""></button>
-                    <button type="button"><img src="./img/Ladrão.png" alt=""></button>
-                    <button type="button"><img src="./img/Arqueiro.png" alt=""></button>
-                    <button type="button"><img src="./img/Barbaro.png" alt=""></button>
-                    <button type="button"><img src="./img/bardo.png" alt=""></button>
-                    <button type="button"><img src="./img/Ninja.png" alt=""></button>
-                    <button type="button"><img src="./img/Lutador.png" alt=""></button>
+                    <label>Classes:</label>
+                    <div class="classes">
+                        <div class="classe-container" onclick="selecionarClasse('Guerreiro', this)">
+                            <span>Guerreiro</span>
+                            <img src="./img/Guerreiro.png" alt="Guerreiro">
+                        </div>
+                        <div class="classe-container" onclick="selecionarClasse('Mago', this)">
+                            <span>Mago</span>
+                            <img src="./img/Mago.png" alt="Mago">
+                        </div>
+                        <div class="classe-container" onclick="selecionarClasse('Ladrao', this)">
+                            <span>Ladrão</span>
+                            <img src="./img/Ladrão.png" alt="Ladrão">
+                        </div>
+                        <div class="classe-container" onclick="selecionarClasse('Arqueiro', this)">
+                            <span>Arqueiro</span>
+                            <img src="./img/Arqueiro.png" alt="Arqueiro">
+                        </div>
+                        <div class="classe-container" onclick="selecionarClasse('Barbaro', this)">
+                            <span>Bárbaro</span>
+                            <img src="./img/Barbaro.png" alt="Bárbaro">
+                        </div>
+                        <div class="classe-container" onclick="selecionarClasse('Bardo', this)">
+                            <span>Bardo</span>
+                            <img src="./img/bardo.png" alt="Bardo">
+                        </div>
+                        <div class="classe-container" onclick="selecionarClasse('Ninja', this)">
+                            <span>Ninja</span>
+                            <img src="./img/Ninja.png" alt="Ninja">
+                        </div>
+                        <div class="classe-container" onclick="selecionarClasse('Lutador', this)">
+                            <span>Lutador</span>
+                            <img src="./img/Lutador.png" alt="Lutador">
+                        </div>
+                    </div>
+                    <input type="hidden" id="classe" name="classe" required>
                 </div>
-        </form>
-    </section>
-</main>
+                <div>
+                    <button type="submit">Criar Personagem</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        // Função para selecionar a classe
+        function selecionarClasse(classe, elemento) {
+            // Remove a classe 'selecionado' de todos os contêineres
+            document.querySelectorAll('.classe-container').forEach(function(container) {
+                container.classList.remove('selecionado');
+            });
+
+            // Adiciona a classe 'selecionado' ao contêiner clicado
+            elemento.classList.add('selecionado');
+
+            // Define o valor da classe selecionada no campo oculto
+            document.getElementById('classe').value = classe;
+        }
+    </script>
 </body>
 </html>
